@@ -1,0 +1,62 @@
+{
+  "version": "1.0",
+  "created_at": "2024-01-01T00:00:00Z",
+  "source_papers": ["示例论文1", "示例论文2"],
+  "advisor": "张老师",
+  "features": {
+    "sentence": {
+      "avg_length": 35,
+      "length_distribution": {
+        "short_min": 10,
+        "short_max": 25,
+        "short_ratio": 0.2,
+        "medium_min": 25,
+        "medium_max": 50,
+        "medium_ratio": 0.6,
+        "long_min": 50,
+        "long_max": 80,
+        "long_ratio": 0.2
+      },
+      "connectors": {
+        "causal": ["因此", "由此可见", "因而"],
+        "transitional": ["然而", "但是"],
+        "progressive": ["更进一步", "此外", "并且"],
+        "conclusive": ["综上所述", "总之"],
+        "exemplary": ["例如", "以...为例"]
+      }
+    },
+    "paragraph": {
+      "avg_length": 200,
+      "opening_patterns": {
+        "topic_sentence": 0.5,
+        "background_intro": 0.2,
+        "contrast_intro": 0.15
+      },
+      "topic_sentence_position": "段首"
+    },
+    "argumentation": {
+      "patterns": ["总-分-总", "因果链", "对比论证"],
+      "preferred_pattern": "总-分-总"
+    },
+    "terminology": {
+      "intro_style": "定义式",
+      "abbreviation_style": "首次全称加缩写",
+      "citation_style": "序号引用"
+    },
+    "tone": {
+      "formality": "非常正式",
+      "voice": "被动语态为主"
+    }
+  },
+  "advisor_preferences": {
+    "strong": [
+      "句子长度在30-50字区间",
+      "使用因果连接词：因此、由此可见",
+      "段落主题句在段首"
+    ],
+    "medium": [
+      "使用递进连接词：此外、更进一步",
+      "采用总-分-总论证结构"
+    ]
+  }
+}

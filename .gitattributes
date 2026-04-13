@@ -1,0 +1,3 @@
+# GitHub language stats
+*.md linguist-documentation=true
+*.py linguist-vendored=false
