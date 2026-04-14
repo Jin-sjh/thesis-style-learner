@@ -4,11 +4,20 @@
 
 Thesis Style Distiller and Content Generator. Learn writing style from previous graduate theses recommended by your advisor, and generate new content with consistent style.
 
+## How to Trigger
+
+Automatically triggered when user needs to generate thesis content. Trigger keywords:
+- "imitate the writing style" / "模仿风格写作"
+- "generate content in same style as advisor's thesis"
+- "extract writing style from this paper"
+- "write XX chapter in this paper's format"
+
 ## Features
 
 - **Multi-Paper Style Fusion** - Extract common style features from multiple papers
 - **Advisor Preference Recognition** - Identify advisor's expression preferences
 - **Deep Style Modeling** - Model sentences, connectors, paragraphs, argumentation
+- **6-Dimension Style Analysis** - Sentence structure, paragraph logic, academic tone, terminology, format, chapter paradigms
 - **Style Consistency Check** - 5-dimension scoring for style consistency
 - **Dedicated Skill Generation** - Generate standalone skill for specific advisor
 
@@ -21,16 +30,9 @@ thesis-style-learner/
 ├── README_EN.md              # English README
 ├── LICENSE                  # MIT License
 ├── .gitignore             # Git ignore config
-├── agents/
-│   └── grading.md        # Style grading agent
 ├── references/
-│   └── schemas.md       # Data structure definitions
-└── scripts/
-    ├── __init__.py
-    ├── analyze_style.py    # Style analysis script
-    ├── check_style.py      # Style check script
-    ├── generate_content.py # Content generation script
-    └── generate_skill.py    # Dedicated skill generation script
+│   ├── style-analysis-prompts.md  # Style analysis prompt templates
+│   └── chapter-templates.md      # Chapter writing frame templates
 ```
 
 ## Quick Start
@@ -39,68 +41,43 @@ thesis-style-learner/
 
 - Python 3.8+
 
-### Installation
-
-```bash
-git clone https://github.com/yourusername/thesis-style-learner.git
-cd thesis-style-learner
-```
-
-### Usage
-
-#### 1. Analyze Paper Style
-
-```bash
-python scripts/analyze_style.py path/to/paper.txt
-```
-
-#### 2. Check Style Consistency
-
-```bash
-python scripts/check_style.py style_model.json generated_text.txt
-```
-
-#### 3. Generate Dedicated Skill
-
-```bash
-python scripts/generate_skill.py style_model.json output_dir/
-```
-
-## Usage in Claude Code
-
-### Install Skill
-
-1. Copy the entire folder to Claude Code's Skills directory:
-   ```
-   C:/Users/<username>/.claude/skills/thesis-style-learner/
-   ```
-
-2. Restart Claude Code
-
-### How to Trigger
-
-Automatically triggered when user needs to generate thesis content.
-
 ### Workflow
 
-1. Provide previous graduate theses (supports txt, pdf, docx)
-2. System analyzes style features
-3. Builds style model
+1. User provides previous graduate theses (supports txt, pdf, docx)
+2. System analyzes style features (6 dimensions)
+3. Builds style profile
 4. Generates thesis content with consistent style
 
-## Scoring Standard
+### Core Principles
 
-Style consistency scoring (max 50 points):
+1. **Learn Style, Not Content** - Extract writing patterns, never copy original text
+2. **Complete Style Profile** - Analyze 6 dimensions (sentence, paragraph, tone, terminology, format, chapter paradigm)
+3. **Actionable Output** - Generated content directly usable for academic writing
+4. **Large File Strategy** - Use layered reading for PDF to avoid token limits
 
-| Dimension | Score | Description |
-|-----------|-------|------------|
-| Sentence Length | /10 | Model matching |
-| Connector Usage | /10 | Preference vocabulary coverage |
-| Paragraph Opening | /10 | Pattern matching |
-| Argumentation | /10 | Structure matching |
-| Terminology | /10 | Habit matching |
+## 6-Dimension Style Analysis
 
-Total ≥ 40/50 = style consistent
+| Dimension | Description |
+|-----------|-------------|
+| Sentence Structure | Avg sentence length, active/passive voice, connector usage |
+| Paragraph Logic | Topic sentence position, support style, development pattern |
+| Academic Tone | Self-reference, emphasis phrases, conclusion language |
+| Terminology Habits | Abbreviation handling, citation format, technical terms |
+| Chapter Format | Title hierarchy, figure/table numbering, summary sections |
+| Chapter Paradigm | Chapter opening-middle-ending templates |
+
+## Style Profile Output
+
+```
+📄 Style Profile
+【Sentence Style】...
+【Paragraph Logic】...
+【Academic Tone】...
+【Terminology Habits】...
+【Format Standards】...
+【Chapter Paradigm】 Abstract/Intro/Related Work/Experiment/Conclusion templates
+【Typical Expression Patterns】 Reusable sentence frames
+```
 
 ## Collaboration with cn-master-thesis
 
@@ -117,6 +94,13 @@ Recommended workflow:
 - Use plagiarism checker to verify originality
 - Important sections should be substantially modified
 - Consult advisor if in doubt
+- Do not generate fake experimental data (use placeholder if data not provided)
+- Reference format templates provided, user responsible for accuracy
+
+## Reference Files
+
+- `references/style-analysis-prompts.md` - Detailed prompt templates for each dimension
+- `references/chapter-templates.md` - Common chapter writing frame templates
 
 ## License
 

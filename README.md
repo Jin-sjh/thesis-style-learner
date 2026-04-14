@@ -4,11 +4,21 @@
 
 毕业论文风格蒸馏与内容生成助手。从导师推荐的往届优秀毕业论文中学习写作风格，并生成风格一致的新内容。
 
+## 触发方式
+
+当用户需要生成毕业论文内容时自动触发。触发关键词包括：
+- 上传论文 PDF 要求"模仿风格写作"
+- "生成同导师风格的论文章节"
+- "提取论文写作风格"
+- "按照这篇论文的格式帮我写XX章节"
+- "分析这篇论文的学术写作习惯"
+
 ## 功能特性
 
 - **多论文风格融合** - 从多篇论文中提取共同风格特征
 - **导师偏好识别** - 识别导师偏好的表达习惯
 - **深度风格建模** - 句式、连接词、段落、论证全面建模
+- **6维度风格分析** - 句式结构、段落逻辑、学术语气、术语习惯、章节格式、章节范式
 - **风格一致性检验** - 5维度评分确保生成内容风格一致
 - **专属Skill生成** - 可生成独立使用的专属风格Skill
 
@@ -18,18 +28,12 @@
 thesis-style-learner/
 ├── SKILL.md                    # 主技能文件 (Claude Code)
 ├── README.md                   # 本文件
+├── README_EN.md                # 英文版
 ├── LICENSE                    # MIT许可证
 ├── .gitignore                # Git忽略配置
-├── agents/
-│   └── grading.md           # 风格评分代理
 ├── references/
-│   └── schemas.md           # 数据结构定义
-└── scripts/
-    ├── __init__.py
-    ├── analyze_style.py    # 风格分析脚本
-    ├── check_style.py      # 风格检验脚本
-    ├── generate_content.py # 内容生成脚本
-    └── generate_skill.py    # 专属Skill生成脚本
+│   ├── style-analysis-prompts.md  # 风格分析提示词模板
+│   └── chapter-templates.md      # 章节写作框架模板
 ```
 
 ## 快速开始
@@ -45,61 +49,43 @@ git clone https://github.com/yourusername/thesis-style-learner.git
 cd thesis-style-learner
 ```
 
-### 使用方法
-
-#### 1. 分析论文风格
-
-```bash
-python scripts/analyze_style.py path/to/paper.txt
-```
-
-#### 2. 检验生成内容的风格一致性
-
-```bash
-python scripts/check_style.py style_model.json generated_text.txt
-```
-
-#### 3. 生成专属Skill
-
-```bash
-python scripts/generate_skill.py style_model.json output_dir/
-```
-
-## 在 Claude Code 中使用
-
-### 安装 Skill
-
-1. 将整个文件夹复制到 Claude Code 的 Skills 目录：
-   ```
-   C:/Users/<username>/.claude/skills/thesis-style-learner/
-   ```
-
-2. 重启 Claude Code
-
-### 触发方式
-
-当用户需要生成毕业论文内容时自动触发。
-
 ### 使用流程
 
-1. 提供往届学生的毕业论文（支持 txt、pdf、docx 格式）
-2. 系统自动分析风格特征
-3. 构建风格模型
+1. 用户提供往届学生的毕业论文（支持 txt、pdf、docx 格式）
+2. 系统自动分析风格特征（6维度全面分析）
+3. 构建风格档案（Style Profile）
 4. 生成符合风格的论文内容
 
-## 评分标准
+### 核心原则
 
-风格一致性评分（满分50分）：
+1. **只学风格，不抄内容** - 从示例论文中提取写作模式，绝不复制原文
+2. **完整风格画像** - 分析 6 个维度（句式、段落逻辑、语气、术语、格式、章节范式）
+3. **可操作输出** - 生成的内容可直接用于学术写作
+4. **大文件优先策略** - 论文 PDF 采用分层读取策略，避免一次性全量加载
 
-| 维度 | 分数 | 说明 |
-|------|------|------|
-| 句式长度 | /10 | 与模型匹配度 |
-| 连接词使用 | /10 | 偏好词汇覆盖率 |
-| 段落开头 | /10 | 模式匹配度 |
-| 论证逻辑 | /10 | 结构匹配度 |
-| 术语表述 | /10 | 习惯匹配度 |
+## 6维度风格分析
 
-总分 ≥ 40/50 视为风格一致
+| 维度 | 说明 |
+|------|------|
+| 句式结构 | 平均句长、主动/被动语态、连接词使用习惯 |
+| 段落逻辑 | 主题句位置、支撑方式、展开模式 |
+| 学术语气 | 自我指称、强调方式、结论引出语 |
+| 术语习惯 | 缩写处理、引用格式、专业名词使用 |
+| 章节格式 | 标题层级、图表公式编号、小结习惯 |
+| 章节范式 | 各章节开头-中间-结尾模板 |
+
+## 风格档案输出示例
+
+```
+📄 论文风格档案（Style Profile）
+【句式风格】...
+【段落逻辑】...
+【学术语气】...
+【术语习惯】...
+【格式规范】...
+【章节范式】摘要/引言/相关工作/实验/结论 范式
+【典型表达模式】可复用的句型框架（非原文内容）
+```
 
 ## 与 cn-master-thesis 协同
 
@@ -116,6 +102,13 @@ python scripts/generate_skill.py style_model.json output_dir/
 - 建议使用查重工具验证原创性
 - 重要章节建议在生成基础上大幅修改
 - 如有疑虑，咨询导师或学术诚信部门
+- 不生成虚假实验数据（如未提供数据，用占位符标记）
+- 参考文献只提供格式模板，具体文献由用户核实
+
+## 参考文件
+
+- `references/style-analysis-prompts.md` - 各维度分析的详细提示词模板
+- `references/chapter-templates.md` - 常见章节的写作框架模板
 
 ## 许可证
 
