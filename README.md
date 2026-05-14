@@ -109,11 +109,3 @@ cd thesis-style-learner
 
 - `references/style-analysis-prompts.md` - 各维度分析的详细提示词模板
 - `references/chapter-templates.md` - 常见章节的写作框架模板
-
-## 许可证
-
-MIT License - 详见 [LICENSE](LICENSE) 文件
-
-## 贡献
-
-欢迎提交 Issue 和 Pull Request！"# thesis-style-learner" 
